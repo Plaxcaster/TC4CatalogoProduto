@@ -1,7 +1,8 @@
 package horizonleap.catalogo.produto.batch;
 
-import horizonleap.catalogo.produto.model.ProdutoModel;
 import org.springframework.batch.item.ItemProcessor;
+
+import horizonleap.catalogo.produto.model.ProdutoModel;
 
 public class ProdutoItemProcessor implements ItemProcessor<ProdutoModel, ProdutoModel> {
     @Override
