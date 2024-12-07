@@ -1,4 +1,4 @@
-package horizonleap.catalogo.produto.controller;
+package horizonleap.catalogo.produto.batch;
 
 import java.io.File;
 import java.util.List;
