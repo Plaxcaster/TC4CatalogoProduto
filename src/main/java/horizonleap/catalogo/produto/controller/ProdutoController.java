@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -70,10 +71,16 @@ public class ProdutoController {
             // Save the file to a specific location (e.g., src/main/resources/produtos.csv)
             File convFile = new File(System.getProperty("java.io.tmpdir") + "/" + file.getOriginalFilename());
             file.transferTo(convFile);
+
+            // Update resource in reader
+            batchService.setResource(new FileSystemResource(convFile));
+
+            // Run the batch job
             batchService.runBatchJob();
             return "Arquivo CSV carregado com sucesso!";
         } catch (Exception e) {
             return "Erro ao carregar o arquivo CSV: " + e.getMessage();
         }
     }
+
 }

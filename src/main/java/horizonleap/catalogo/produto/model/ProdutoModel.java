@@ -22,7 +22,7 @@ public class ProdutoModel {
     @Column
     private String descricao;
     @Column
-    private String preco;
+    private Long preco;
     @Column
     private int quantidadeEstoque;
     
@@ -31,7 +31,7 @@ public class ProdutoModel {
     public ProdutoModel() {
     }
 
-    public ProdutoModel(String nome, String descricao, String preco) {
+    public ProdutoModel(String nome, String descricao, Long preco) {
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
@@ -61,11 +61,11 @@ public class ProdutoModel {
         this.descricao = descricao;
     }
 
-    public String getPreco() {
+    public Long getPreco() {
         return preco;
     }
 
-    public void setPreco(String preco) {
+    public void setPreco(Long preco) {
         this.preco = preco;
     }
 
