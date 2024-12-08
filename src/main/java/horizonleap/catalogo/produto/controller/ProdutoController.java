@@ -1,9 +1,11 @@
 package horizonleap.catalogo.produto.controller;
 
+import java.io.File;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import horizonleap.catalogo.produto.model.ProdutoModel;
+import horizonleap.catalogo.produto.service.BatchService;
 import horizonleap.catalogo.produto.service.ProdutoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -26,6 +30,9 @@ public class ProdutoController {
 
     @Autowired
     private ProdutoService produtoService;
+
+    @Autowired
+    private BatchService batchService;
 
     @GetMapping
     @Operation(summary = "Obter todos os produtos", description = "Recuperar uma lista de todos os produtos")
@@ -56,4 +63,24 @@ public class ProdutoController {
     public void deleteProduct(@PathVariable Integer id) {
         produtoService.deleteProduct(id);
     }
+
+    @PostMapping("/upload")
+    @Operation(summary = "Carregar produtos em massa", description = "Carregar dados de produtos em massa a partir de um arquivo CSV")
+    public String uploadCSV(@RequestParam("file") MultipartFile file) {
+        try {
+            // Save the file to a specific location (e.g., src/main/resources/produtos.csv)
+            File convFile = new File(System.getProperty("java.io.tmpdir") + "/" + file.getOriginalFilename());
+            file.transferTo(convFile);
+
+            // Update resource in reader
+            batchService.setResource(new FileSystemResource(convFile));
+
+            // Run the batch job
+            batchService.runBatchJob();
+            return "Arquivo CSV carregado com sucesso!";
+        } catch (Exception e) {
+            return "Erro ao carregar o arquivo CSV: " + e.getMessage();
+        }
+    }
+
 }

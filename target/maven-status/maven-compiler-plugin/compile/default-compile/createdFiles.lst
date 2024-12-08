@@ -1,1 +1,9 @@
+horizonleap\catalogo\produto\controller\ProdutoController.class
+horizonleap\catalogo\produto\service\BatchService.class
 horizonleap\catalogo\produto\CatalogoProdutoApplication.class
+horizonleap\catalogo\produto\batch\ProdutoItemProcessor.class
+horizonleap\catalogo\produto\repository\ProdutoRepository.class
+horizonleap\catalogo\produto\service\ProdutoService.class
+horizonleap\catalogo\produto\model\ProdutoModel.class
+horizonleap\catalogo\produto\batch\BatchConfig.class
+horizonleap\catalogo\produto\batch\BatchConfig$1.class
