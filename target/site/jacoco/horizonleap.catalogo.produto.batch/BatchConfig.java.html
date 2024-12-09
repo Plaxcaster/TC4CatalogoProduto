@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BatchConfig.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">catalogo-produto</a> &gt; <a href="index.source.html" class="el_package">horizonleap.catalogo.produto.batch</a> &gt; <span class="el_source">BatchConfig.java</span></div><h1>BatchConfig.java</h1><pre class="source lang-java linenums">package horizonleap.catalogo.produto.batch;
+
+import horizonleap.catalogo.produto.model.ProdutoModel;
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.Step;
+import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
+import org.springframework.batch.core.job.builder.JobBuilder;
+import org.springframework.batch.core.launch.support.RunIdIncrementer;
+import org.springframework.batch.core.repository.JobRepository;
+import org.springframework.batch.item.database.JdbcBatchItemWriter;
+import org.springframework.batch.item.database.builder.JdbcBatchItemWriterBuilder;
+import org.springframework.batch.item.file.FlatFileItemReader;
+import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
+import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.transaction.PlatformTransactionManager;
+import javax.sql.DataSource;
+import org.springframework.batch.core.step.builder.StepBuilder;
+
+@Configuration
+@EnableBatchProcessing
+<span class="fc" id="L24">public class BatchConfig {</span>
+
+    @Bean
+    public FlatFileItemReader&lt;ProdutoModel&gt; reader() {
+<span class="fc" id="L28">        return new FlatFileItemReaderBuilder&lt;ProdutoModel&gt;()</span>
+<span class="fc" id="L29">                .name(&quot;produtoItemReader&quot;)</span>
+<span class="fc" id="L30">                .resource(new FileSystemResource(&quot;&quot;)) // Placeholder, will be set dynamically</span>
+<span class="fc" id="L31">                .delimited()</span>
+<span class="fc" id="L32">                .names(&quot;nome&quot;, &quot;descricao&quot;, &quot;preco&quot;, &quot;quantidadeEstoque&quot;)</span>
+<span class="fc" id="L33">                .fieldSetMapper(new BeanWrapperFieldSetMapper&lt;ProdutoModel&gt;() {{</span>
+<span class="fc" id="L34">                    setTargetType(ProdutoModel.class);</span>
+<span class="fc" id="L35">                }})</span>
+<span class="fc" id="L36">                .build();</span>
+    }
+
+    @Bean
+    public ProdutoItemProcessor processor() {
+<span class="fc" id="L41">        return new ProdutoItemProcessor();</span>
+    }
+
+    @Bean
+    public JdbcBatchItemWriter&lt;ProdutoModel&gt; writer(DataSource dataSource) {
+<span class="fc" id="L46">        return new JdbcBatchItemWriterBuilder&lt;ProdutoModel&gt;()</span>
+<span class="fc" id="L47">                .sql(&quot;INSERT INTO produto (nome, descricao, preco, quantidade_estoque) VALUES (:nome, :descricao, :preco, :quantidadeEstoque)&quot;)</span>
+<span class="fc" id="L48">                .dataSource(dataSource)</span>
+<span class="fc" id="L49">                .beanMapped()</span>
+<span class="fc" id="L50">                .build();</span>
+    }
+
+    @Bean
+    public Step step1(JobRepository jobRepository, PlatformTransactionManager transactionManager,
+                      FlatFileItemReader&lt;ProdutoModel&gt; reader, JdbcBatchItemWriter&lt;ProdutoModel&gt; writer,
+                      ProdutoItemProcessor processor) {
+<span class="fc" id="L57">        return new StepBuilder(&quot;step1&quot;, jobRepository)</span>
+<span class="fc" id="L58">                .&lt;ProdutoModel, ProdutoModel&gt;chunk(10, transactionManager)</span>
+<span class="fc" id="L59">                .reader(reader)</span>
+<span class="fc" id="L60">                .processor(processor)</span>
+<span class="fc" id="L61">                .writer(writer)</span>
+<span class="fc" id="L62">                .build();</span>
+    }
+
+    @Bean
+    public Job importProdutoJob(JobRepository jobRepository, Step step1) {
+<span class="fc" id="L67">        return new JobBuilder(&quot;importProdutoJob&quot;, jobRepository)</span>
+<span class="fc" id="L68">                .incrementer(new RunIdIncrementer())</span>
+<span class="fc" id="L69">                .start(step1)</span>
+<span class="fc" id="L70">                .build();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="horizonleap.catalogo.produto.CatalogoProdutoApplicationTests" time="5.742" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="horizonleap.catalogo.produto.ProdutoControllerTest" time="0.758" tests="6" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -63,63 +63,40 @@
     <property name="java.class.version" value="61.0"/>
     <property name="LOGGED_APPLICATION_NAME" value="[catalogo-produto] "/>
   </properties>
-  <testcase name="contextLoads" classname="horizonleap.catalogo.produto.CatalogoProdutoApplicationTests" time="0.368">
-    <system-out><![CDATA[20:39:43.292 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [horizonleap.catalogo.produto.CatalogoProdutoApplicationTests]: CatalogoProdutoApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-20:39:43.457 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration horizonleap.catalogo.produto.CatalogoProdutoApplication for test class horizonleap.catalogo.produto.CatalogoProdutoApplicationTests
-
-  .   ____          _            __ _ _
- /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
-( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
- \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
-  '  |____| .__|_| |_|_| |_\__, | / / / /
- =========|_|==============|___/=/_/_/_/
-
- :: Spring Boot ::                (v3.3.5)
-
-2024-12-09T20:39:44.027-03:00  INFO 6612 --- [catalogo-produto] [           main] h.c.p.CatalogoProdutoApplicationTests    : Starting CatalogoProdutoApplicationTests using Java 17.0.11 with PID 6612 (started by pedro in C:\Users\pedro\java projects\TC4CatalogoProduto)
-2024-12-09T20:39:44.029-03:00  INFO 6612 --- [catalogo-produto] [           main] h.c.p.CatalogoProdutoApplicationTests    : The following 1 profile is active: "dev"
-2024-12-09T20:39:44.587-03:00  INFO 6612 --- [catalogo-produto] [           main] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 5 ms.
-2024-12-09T20:39:44.932-03:00  INFO 6612 --- [catalogo-produto] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2024-12-09T20:39:44.988-03:00  INFO 6612 --- [catalogo-produto] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 48 ms. Found 1 JPA repository interface.
-2024-12-09T20:39:45.300-03:00  WARN 6612 --- [catalogo-produto] [           main] trationDelegate$BeanPostProcessorChecker : Bean 'jobRegistry' of type [org.springframework.batch.core.configuration.support.MapJobRegistry] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected/applied to a currently created BeanPostProcessor [jobRegistryBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies/advisors. If this bean does not have to be post-processed, declare it with ROLE_INFRASTRUCTURE.
-2024-12-09T20:39:45.454-03:00  INFO 6612 --- [catalogo-produto] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2024-12-09T20:39:45.540-03:00  INFO 6612 --- [catalogo-produto] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
-2024-12-09T20:39:45.585-03:00  INFO 6612 --- [catalogo-produto] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2024-12-09T20:39:46.000-03:00  INFO 6612 --- [catalogo-produto] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2024-12-09T20:39:46.042-03:00  INFO 6612 --- [catalogo-produto] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2024-12-09T20:39:46.345-03:00  INFO 6612 --- [catalogo-produto] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
-2024-12-09T20:39:46.348-03:00  INFO 6612 --- [catalogo-produto] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2024-12-09T20:39:46.384-03:00  WARN 6612 --- [catalogo-produto] [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2024-12-09T20:39:47.302-03:00  INFO 6612 --- [catalogo-produto] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2024-12-09T20:39:47.375-03:00  INFO 6612 --- [catalogo-produto] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2024-12-09T20:39:47.610-03:00 DEBUG 6612 --- [catalogo-produto] [           main] o.s.jdbc.datasource.DataSourceUtils      : Fetching JDBC Connection from DataSource
-2024-12-09T20:39:47.616-03:00 DEBUG 6612 --- [catalogo-produto] [           main] o.s.jdbc.datasource.DataSourceUtils      : Fetching JDBC Connection from DataSource
-2024-12-09T20:39:47.617-03:00 DEBUG 6612 --- [catalogo-produto] [           main] o.s.jdbc.datasource.init.ScriptUtils     : Executing SQL script from class path resource [org/springframework/batch/core/schema-h2.sql]
-2024-12-09T20:39:47.621-03:00 DEBUG 6612 --- [catalogo-produto] [           main] o.s.jdbc.datasource.init.ScriptUtils     : 0 returned as update count for SQL: CREATE TABLE BATCH_JOB_INSTANCE ( JOB_INSTANCE_ID BIGINT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY , VERSION BIGINT , JOB_NAME VARCHAR(100) NOT NULL, JOB_KEY VARCHAR(32) NOT NULL, constraint JOB_INST_UN unique (JOB_NAME, JOB_KEY) ) 
-2024-12-09T20:39:47.627-03:00 DEBUG 6612 --- [catalogo-produto] [           main] o.s.jdbc.datasource.init.ScriptUtils     : 0 returned as update count for SQL: CREATE TABLE BATCH_JOB_EXECUTION ( JOB_EXECUTION_ID BIGINT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY , VERSION BIGINT , JOB_INSTANCE_ID BIGINT NOT NULL, CREATE_TIME TIMESTAMP(9) NOT NULL, START_TIME TIMESTAMP(9) DEFAULT NULL , END_TIME TIMESTAMP(9) DEFAULT NULL , STATUS VARCHAR(10) , EXIT_CODE VARCHAR(2500) , EXIT_MESSAGE VARCHAR(2500) , LAST_UPDATED TIMESTAMP(9), constraint JOB_INST_EXEC_FK foreign key (JOB_INSTANCE_ID) references BATCH_JOB_INSTANCE(JOB_INSTANCE_ID) ) 
-2024-12-09T20:39:47.629-03:00 DEBUG 6612 --- [catalogo-produto] [           main] o.s.jdbc.datasource.init.ScriptUtils     : 0 returned as update count for SQL: CREATE TABLE BATCH_JOB_EXECUTION_PARAMS ( JOB_EXECUTION_ID BIGINT NOT NULL , PARAMETER_NAME VARCHAR(100) NOT NULL , PARAMETER_TYPE VARCHAR(100) NOT NULL , PARAMETER_VALUE VARCHAR(2500) , IDENTIFYING CHAR(1) NOT NULL , constraint JOB_EXEC_PARAMS_FK foreign key (JOB_EXECUTION_ID) references BATCH_JOB_EXECUTION(JOB_EXECUTION_ID) ) 
-2024-12-09T20:39:47.631-03:00 DEBUG 6612 --- [catalogo-produto] [           main] o.s.jdbc.datasource.init.ScriptUtils     : 0 returned as update count for SQL: CREATE TABLE BATCH_STEP_EXECUTION ( STEP_EXECUTION_ID BIGINT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY , VERSION BIGINT NOT NULL, STEP_NAME VARCHAR(100) NOT NULL, JOB_EXECUTION_ID BIGINT NOT NULL, CREATE_TIME TIMESTAMP(9) NOT NULL, START_TIME TIMESTAMP(9) DEFAULT NULL , END_TIME TIMESTAMP(9) DEFAULT NULL , STATUS VARCHAR(10) , COMMIT_COUNT BIGINT , READ_COUNT BIGINT , FILTER_COUNT BIGINT , WRITE_COUNT BIGINT , READ_SKIP_COUNT BIGINT , WRITE_SKIP_COUNT BIGINT , PROCESS_SKIP_COUNT BIGINT , ROLLBACK_COUNT BIGINT , EXIT_CODE VARCHAR(2500) , EXIT_MESSAGE VARCHAR(2500) , LAST_UPDATED TIMESTAMP(9), constraint JOB_EXEC_STEP_FK foreign key (JOB_EXECUTION_ID) references BATCH_JOB_EXECUTION(JOB_EXECUTION_ID) ) 
-2024-12-09T20:39:47.633-03:00 DEBUG 6612 --- [catalogo-produto] [           main] o.s.jdbc.datasource.init.ScriptUtils     : 0 returned as update count for SQL: CREATE TABLE BATCH_STEP_EXECUTION_CONTEXT ( STEP_EXECUTION_ID BIGINT NOT NULL PRIMARY KEY, SHORT_CONTEXT VARCHAR(2500) NOT NULL, SERIALIZED_CONTEXT LONGVARCHAR , constraint STEP_EXEC_CTX_FK foreign key (STEP_EXECUTION_ID) references BATCH_STEP_EXECUTION(STEP_EXECUTION_ID) ) 
-2024-12-09T20:39:47.635-03:00 DEBUG 6612 --- [catalogo-produto] [           main] o.s.jdbc.datasource.init.ScriptUtils     : 0 returned as update count for SQL: CREATE TABLE BATCH_JOB_EXECUTION_CONTEXT ( JOB_EXECUTION_ID BIGINT NOT NULL PRIMARY KEY, SHORT_CONTEXT VARCHAR(2500) NOT NULL, SERIALIZED_CONTEXT LONGVARCHAR , constraint JOB_EXEC_CTX_FK foreign key (JOB_EXECUTION_ID) references BATCH_JOB_EXECUTION(JOB_EXECUTION_ID) ) 
-2024-12-09T20:39:47.635-03:00 DEBUG 6612 --- [catalogo-produto] [           main] o.s.jdbc.datasource.init.ScriptUtils     : 0 returned as update count for SQL: CREATE SEQUENCE BATCH_STEP_EXECUTION_SEQ
-2024-12-09T20:39:47.636-03:00 DEBUG 6612 --- [catalogo-produto] [           main] o.s.jdbc.datasource.init.ScriptUtils     : 0 returned as update count for SQL: CREATE SEQUENCE BATCH_JOB_EXECUTION_SEQ
-2024-12-09T20:39:47.636-03:00 DEBUG 6612 --- [catalogo-produto] [           main] o.s.jdbc.datasource.init.ScriptUtils     : 0 returned as update count for SQL: CREATE SEQUENCE BATCH_JOB_SEQ
-2024-12-09T20:39:47.637-03:00 DEBUG 6612 --- [catalogo-produto] [           main] o.s.jdbc.datasource.init.ScriptUtils     : Executed SQL script from class path resource [org/springframework/batch/core/schema-h2.sql] in 19 ms.
-2024-12-09T20:39:47.638-03:00 DEBUG 6612 --- [catalogo-produto] [           main] o.s.jdbc.datasource.DataSourceUtils      : Fetching JDBC Connection from DataSource
-2024-12-09T20:39:47.638-03:00 DEBUG 6612 --- [catalogo-produto] [           main] o.s.jdbc.datasource.DataSourceUtils      : Fetching JDBC Connection from DataSource
-2024-12-09T20:39:47.639-03:00 DEBUG 6612 --- [catalogo-produto] [           main] o.s.jdbc.datasource.init.ScriptUtils     : Executing SQL script from file [C:\Users\pedro\java projects\TC4CatalogoProduto\target\classes\data-h2.sql]
-2024-12-09T20:39:47.639-03:00 DEBUG 6612 --- [catalogo-produto] [           main] o.s.jdbc.datasource.init.ScriptUtils     : 0 returned as update count for SQL: CREATE TABLE IF NOT EXISTS produto ( id INT AUTO_INCREMENT PRIMARY KEY, nome VARCHAR(255), descricao VARCHAR(255), preco BIGINT, quantidade_estoque INT )
-2024-12-09T20:39:47.642-03:00 DEBUG 6612 --- [catalogo-produto] [           main] o.s.jdbc.datasource.init.ScriptUtils     : 5 returned as update count for SQL: INSERT INTO produto (nome, descricao, preco, quantidade_estoque) VALUES ('Produto A', 'Descricao do Produto A', 100, 10), ('Produto B', 'Descricao do Produto B', 200, 20), ('Produto C', 'Descricao do Produto C', 300, 30), ('Produto D', 'Descricao do Produto D', 400, 40), ('Produto E', 'Descricao do Produto E', 500, 50)
-2024-12-09T20:39:47.642-03:00 DEBUG 6612 --- [catalogo-produto] [           main] o.s.jdbc.datasource.init.ScriptUtils     : Executed SQL script from file [C:\Users\pedro\java projects\TC4CatalogoProduto\target\classes\data-h2.sql] in 3 ms.
-2024-12-09T20:39:47.663-03:00 DEBUG 6612 --- [catalogo-produto] [           main] o.s.jdbc.datasource.DataSourceUtils      : Fetching JDBC Connection from DataSource
-2024-12-09T20:39:47.664-03:00  INFO 6612 --- [catalogo-produto] [           main] o.s.b.c.r.s.JobRepositoryFactoryBean     : No database type set, using meta data indicating: H2
-2024-12-09T20:39:47.680-03:00  INFO 6612 --- [catalogo-produto] [           main] o.s.b.c.l.support.SimpleJobLauncher      : No TaskExecutor has been set, defaulting to synchronous executor.
-2024-12-09T20:39:47.736-03:00  INFO 6612 --- [catalogo-produto] [           main] .c.a.BatchObservabilityBeanPostProcessor : No Micrometer observation registry found, defaulting to ObservationRegistry.NOOP
-2024-12-09T20:39:47.743-03:00  INFO 6612 --- [catalogo-produto] [           main] .c.a.BatchObservabilityBeanPostProcessor : No Micrometer observation registry found, defaulting to ObservationRegistry.NOOP
-2024-12-09T20:39:47.744-03:00 DEBUG 6612 --- [catalogo-produto] [           main] o.s.b.c.c.s.JobRegistryBeanPostProcessor : Registering job: importProdutoJob
-2024-12-09T20:39:47.955-03:00  WARN 6612 --- [catalogo-produto] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2024-12-09T20:39:48.342-03:00  INFO 6612 --- [catalogo-produto] [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
-2024-12-09T20:39:48.387-03:00  INFO 6612 --- [catalogo-produto] [           main] h.c.p.CatalogoProdutoApplicationTests    : Started CatalogoProdutoApplicationTests in 4.704 seconds (process running for 6.046)
+  <testcase name="testUpdateProductQuantity" classname="horizonleap.catalogo.produto.ProdutoControllerTest" time="0.656">
+    <system-out><![CDATA[2024-12-09T20:39:49.141-03:00  INFO 6612 --- [catalogo-produto] [           main] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2024-12-09T20:39:49.141-03:00  INFO 6612 --- [catalogo-produto] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-12-09T20:39:49.143-03:00  INFO 6612 --- [catalogo-produto] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+]]></system-out>
+  </testcase>
+  <testcase name="testScheduleUploadCSV" classname="horizonleap.catalogo.produto.ProdutoControllerTest" time="0.028">
+    <system-out><![CDATA[2024-12-09T20:39:49.452-03:00  INFO 6612 --- [catalogo-produto] [           main] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2024-12-09T20:39:49.453-03:00  INFO 6612 --- [catalogo-produto] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-12-09T20:39:49.453-03:00  INFO 6612 --- [catalogo-produto] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+]]></system-out>
+  </testcase>
+  <testcase name="testGetProductById" classname="horizonleap.catalogo.produto.ProdutoControllerTest" time="0.019">
+    <system-out><![CDATA[2024-12-09T20:39:49.480-03:00  INFO 6612 --- [catalogo-produto] [           main] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2024-12-09T20:39:49.480-03:00  INFO 6612 --- [catalogo-produto] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-12-09T20:39:49.480-03:00  INFO 6612 --- [catalogo-produto] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+]]></system-out>
+  </testcase>
+  <testcase name="testDeleteProduct" classname="horizonleap.catalogo.produto.ProdutoControllerTest" time="0.013">
+    <system-out><![CDATA[2024-12-09T20:39:49.500-03:00  INFO 6612 --- [catalogo-produto] [           main] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2024-12-09T20:39:49.500-03:00  INFO 6612 --- [catalogo-produto] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-12-09T20:39:49.500-03:00  INFO 6612 --- [catalogo-produto] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+]]></system-out>
+  </testcase>
+  <testcase name="testGetAllProducts" classname="horizonleap.catalogo.produto.ProdutoControllerTest" time="0.015">
+    <system-out><![CDATA[2024-12-09T20:39:49.513-03:00  INFO 6612 --- [catalogo-produto] [           main] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2024-12-09T20:39:49.513-03:00  INFO 6612 --- [catalogo-produto] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-12-09T20:39:49.513-03:00  INFO 6612 --- [catalogo-produto] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+]]></system-out>
+  </testcase>
+  <testcase name="testUploadCSV" classname="horizonleap.catalogo.produto.ProdutoControllerTest" time="0.017">
+    <system-out><![CDATA[2024-12-09T20:39:49.530-03:00  INFO 6612 --- [catalogo-produto] [           main] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2024-12-09T20:39:49.531-03:00  INFO 6612 --- [catalogo-produto] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-12-09T20:39:49.531-03:00  INFO 6612 --- [catalogo-produto] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
 ]]></system-out>
   </testcase>
 </testsuite>
