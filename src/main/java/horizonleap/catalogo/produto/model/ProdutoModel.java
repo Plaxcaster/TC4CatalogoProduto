@@ -31,6 +31,13 @@ public class ProdutoModel {
     public ProdutoModel() {
     }
 
+    public ProdutoModel(String nome, String descricao, Long preco, Integer quantidadeEstoque) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.preco = preco;
+        this.quantidadeEstoque = quantidadeEstoque;
+    }
+
     public ProdutoModel(String nome, String descricao, Long preco) {
         this.nome = nome;
         this.descricao = descricao;
