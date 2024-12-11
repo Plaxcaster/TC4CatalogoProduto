@@ -1,5 +1,6 @@
 package horizonleap.catalogo.produto.service;
 
+import java.io.InvalidClassException;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,7 +9,9 @@ import org.springframework.stereotype.Service;
 
 import horizonleap.catalogo.produto.model.ProdutoModel;
 import horizonleap.catalogo.produto.repository.ProdutoRepository;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 public class ProdutoService {
 
@@ -39,5 +42,20 @@ public class ProdutoService {
 
     public void deleteProduct(Integer id) {
         produtoRepository.deleteById(id);
+    }
+
+    public void reduceProductQuantity(Integer id , Integer quantidade){
+        ProdutoModel produto = getProductById(id).orElseThrow();
+
+        log.info("tinha " + produto.getQuantidadeEstoque() + " em estoque");
+        
+        if (produto.getQuantidadeEstoque() < quantidade){
+            //TODO tratamento caso não haja estoque suficiente
+        }
+        Integer novaQuantidade = produto.getQuantidadeEstoque() - quantidade;
+
+        updateProductQuantity(id , novaQuantidade);
+
+        log.info("Agora tem " + novaQuantidade + " em estoque");
     }
 }
