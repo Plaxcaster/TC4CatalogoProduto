@@ -20,8 +20,11 @@ public class PedidoFeitoConsumer {
     @Bean
     public Consumer<dadosPedidoConcluido> pedidoConcluido() {
         return pedido -> {
-            pedido.getListaItens()
-                    .forEach(item -> service.reduceProductQuantity(item.getIdProduto(), item.getQuantidade()));
+            // TODO incluir processo de serialização nos eventos para conseguirmos recuperar
+            // a lista de itens do pedido
+            // pedido.getListaItens()
+            // .forEach(item -> service.reduceProductQuantity(item.getIdProduto(),
+            // item.getQuantidade()));
         };
     }
 
