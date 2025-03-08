@@ -1,4 +1,4 @@
-package horizonleap.catalogo.produto.api.Consumer;
+package horizonleap.catalogo.produto.api.consumer;
 
 import java.util.function.Consumer;
 

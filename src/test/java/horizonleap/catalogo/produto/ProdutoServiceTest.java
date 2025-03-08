@@ -17,7 +17,7 @@ import horizonleap.catalogo.produto.model.ProdutoModel;
 import horizonleap.catalogo.produto.repository.ProdutoRepository;
 import horizonleap.catalogo.produto.service.ProdutoService;
 
-public class ProdutoServiceTest {
+class ProdutoServiceTest {
 
     @InjectMocks
     private ProdutoService produtoService;
@@ -26,12 +26,12 @@ public class ProdutoServiceTest {
     private ProdutoRepository produtoRepository;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    public void testAddProduct() {
+    void testAddProduct() {
         ProdutoModel product = new ProdutoModel("Produto XA", "Descricao do Produto XA", 100L);
         when(produtoRepository.save(any(ProdutoModel.class))).thenReturn(product);
 
@@ -42,7 +42,7 @@ public class ProdutoServiceTest {
     }
 
     @Test
-    public void testUpdateProductQuantity() {
+    void testUpdateProductQuantity() {
         ProdutoModel product = new ProdutoModel("Produto XA", "Descricao do Produto XA", 100L);
         product.setId(1);
         product.setQuantidadeEstoque(10);

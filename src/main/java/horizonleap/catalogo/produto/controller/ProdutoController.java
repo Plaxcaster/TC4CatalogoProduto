@@ -8,7 +8,6 @@ import java.util.Optional;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,14 +33,17 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @Tag(name = "Produto", description = "Endpoints para gerenciamento de produtos")
 public class ProdutoController {
 
-    @Autowired
-    private ProdutoService produtoService;
+    private final ProdutoService produtoService;
+    private final BatchService batchService;
+    private final ScheduledExecutorService scheduledExecutorService;
 
-    @Autowired
-    private BatchService batchService;
-
-    @Autowired
-    private ScheduledExecutorService scheduledExecutorService;
+    // Constructor injection
+    public ProdutoController(ProdutoService produtoService, BatchService batchService,
+            ScheduledExecutorService scheduledExecutorService) {
+        this.produtoService = produtoService;
+        this.batchService = batchService;
+        this.scheduledExecutorService = scheduledExecutorService;
+    }
 
     @GetMapping
     @Operation(summary = "Obter todos os produtos", description = "Recuperar uma lista de todos os produtos")
@@ -80,10 +82,10 @@ public class ProdutoController {
             // Save the file to a specific location
             File convFile = new File(System.getProperty("java.io.tmpdir") + "/" + file.getOriginalFilename());
             file.transferTo(convFile);
-            
+
             // Update resource in reader
             batchService.setResource(new FileSystemResource(convFile));
-            
+
             // Run the batch job
             batchService.runBatchJob();
             return "Arquivo CSV carregado com sucesso!";
@@ -95,29 +97,32 @@ public class ProdutoController {
 
     @PostMapping("/schedule-upload")
     @Operation(summary = "Agendar processamento de produtos em massa", description = "Agendar processamento de dados de produtos em massa a partir de um arquivo CSV")
-    public String scheduleUploadCSV(@RequestParam("file") MultipartFile file, @RequestParam("scheduleDateTime") String scheduleDateTime) {
+    public String scheduleUploadCSV(@RequestParam("file") MultipartFile file,
+            @RequestParam("scheduleDateTime") String scheduleDateTime) {
         try {
             // Save the file to a specific location
             File convFile = new File(System.getProperty("java.io.tmpdir") + "/" + file.getOriginalFilename());
             file.transferTo(convFile);
-            
+
             // Parse the schedule date and time
-            LocalDateTime dateTime = LocalDateTime.parse(scheduleDateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-            long delay = dateTime.atZone(java.time.ZoneId.systemDefault()).toInstant().toEpochMilli() - System.currentTimeMillis();
-            
+            LocalDateTime dateTime = LocalDateTime.parse(scheduleDateTime,
+                    DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+            long delay = dateTime.atZone(java.time.ZoneId.systemDefault()).toInstant().toEpochMilli()
+                    - System.currentTimeMillis();
+
             // Schedule the batch job
             scheduledExecutorService.schedule(() -> {
                 try {
                     // Update resource in reader
                     batchService.setResource(new FileSystemResource(convFile));
-                    
+
                     // Run the batch job
                     batchService.runBatchJob();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }, delay, TimeUnit.MILLISECONDS);
-            
+
             return "Processamento agendado para " + scheduleDateTime + " com sucesso!";
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,35 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BatchService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">catalogo-produto</a> &gt; <a href="index.source.html" class="el_package">horizonleap.catalogo.produto.service</a> &gt; <span class="el_source">BatchService.java</span></div><h1>BatchService.java</h1><pre class="source lang-java linenums">package horizonleap.catalogo.produto.service;
 
-import horizonleap.catalogo.produto.model.ProdutoModel;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.item.file.FlatFileItemReader;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import horizonleap.catalogo.produto.model.ProdutoModel;
+
 @Service
-<span class="fc" id="L14">public class BatchService {</span>
+public class BatchService {
 
-    @Autowired
-    private JobLauncher jobLauncher;
+    private final JobLauncher jobLauncher;
+    private final Job job;
+    private final FlatFileItemReader&lt;ProdutoModel&gt; reader;
 
-    @Autowired
-    private Job job;
-
-    @Autowired
-    private FlatFileItemReader&lt;ProdutoModel&gt; reader;
+    // Constructor injection
+<span class="fc" id="L20">    public BatchService(JobLauncher jobLauncher, Job job, FlatFileItemReader&lt;ProdutoModel&gt; reader) {</span>
+<span class="fc" id="L21">        this.jobLauncher = jobLauncher;</span>
+<span class="fc" id="L22">        this.job = job;</span>
+<span class="fc" id="L23">        this.reader = reader;</span>
+<span class="fc" id="L24">    }</span>
 
     public void runBatchJob() throws Exception {
-<span class="nc" id="L26">        jobLauncher.run(job, new JobParametersBuilder()</span>
-<span class="nc" id="L27">                .addLong(&quot;startAt&quot;, System.currentTimeMillis())</span>
-<span class="nc" id="L28">                .toJobParameters());</span>
-<span class="nc" id="L29">    }</span>
+<span class="nc" id="L27">        jobLauncher.run(job, new JobParametersBuilder()</span>
+<span class="nc" id="L28">                .addLong(&quot;startAt&quot;, System.currentTimeMillis())</span>
+<span class="nc" id="L29">                .toJobParameters());</span>
+<span class="nc" id="L30">    }</span>
 
     public void setResource(Resource resource) {
-<span class="nc" id="L32">        reader.setResource(resource);</span>
-<span class="nc" id="L33">    }</span>
+<span class="nc" id="L33">        reader.setResource(resource);</span>
+<span class="nc" id="L34">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
