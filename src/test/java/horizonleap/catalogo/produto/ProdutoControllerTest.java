@@ -28,7 +28,7 @@ import horizonleap.catalogo.produto.model.ProdutoModel;
 import horizonleap.catalogo.produto.service.BatchService;
 import horizonleap.catalogo.produto.service.ProdutoService;
 
-public class ProdutoControllerTest {
+class ProdutoControllerTest {
 
     private MockMvc mockMvc;
 
@@ -45,20 +45,20 @@ public class ProdutoControllerTest {
     private ScheduledExecutorService scheduledExecutorService;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         MockitoAnnotations.openMocks(this);
         mockMvc = MockMvcBuilders.standaloneSetup(produtoController).build();
     }
 
     @Test
-    public void testGetAllProducts() throws Exception {
+    void testGetAllProducts() throws Exception {
         mockMvc.perform(get("/produtos"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON));
     }
 
     @Test
-    public void testGetProductById() throws Exception {
+    void testGetProductById() throws Exception {
         ProdutoModel product = new ProdutoModel("Produto XY", "Descricao do Produto XY", 100L);
         product.setId(1);
         when(produtoService.getProductById(1)).thenReturn(Optional.of(product));
@@ -72,7 +72,7 @@ public class ProdutoControllerTest {
     }
 
     @Test
-    public void testUpdateProductQuantity() throws Exception {
+    void testUpdateProductQuantity() throws Exception {
         ProdutoModel product = new ProdutoModel("Produto XY", "Descricao do Produto XY", 100L);
         product.setId(1);
         product.setQuantidadeEstoque(20);
@@ -87,7 +87,7 @@ public class ProdutoControllerTest {
     }
 
     @Test
-    public void testDeleteProduct() throws Exception {
+    void testDeleteProduct() throws Exception {
         mockMvc.perform(delete("/produtos/1"))
                 .andExpect(status().isOk());
 
@@ -95,7 +95,7 @@ public class ProdutoControllerTest {
     }
 
     @Test
-    public void testUploadCSV() throws Exception {
+    void testUploadCSV() throws Exception {
         MockMultipartFile file = new MockMultipartFile("file", "produtos.csv", "text/csv", "nome,descricao,preco,quantidadeEstoque\nProduto XY,Descricao A,100,10".getBytes());
 
         mockMvc.perform(multipart("/produtos/upload").file(file))
@@ -104,7 +104,7 @@ public class ProdutoControllerTest {
     }
 
     @Test
-    public void testScheduleUploadCSV() throws Exception {
+    void testScheduleUploadCSV() throws Exception {
         MockMultipartFile file = new MockMultipartFile("file", "produtos.csv", "text/csv", "nome,descricao,preco,quantidadeEstoque\nProduto XY,Descricao A,100,10".getBytes());
 
         mockMvc.perform(multipart("/produtos/schedule-upload")
